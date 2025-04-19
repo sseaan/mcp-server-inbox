@@ -1,5 +1,7 @@
 # Inbox MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@sseaan/mcp-server-inbox)](https://smithery.ai/server/@sseaan/mcp-server-inbox)
+
 一个基于[MCP(Model Context Protocol)](https://modelcontextprotocol.io)的服务器，用于将笔记发送到Inbox API。
 
 ## 功能
@@ -11,6 +13,14 @@
 - 简单易用的API接口
 
 ## 安装
+
+### 安装 via Smithery
+
+要自动为 Claude Desktop 安装 MCP Server 服务器，你可以使用 [Smithery](https://smithery.ai/server/@sseaan/mcp-server-inbox):
+
+```bash
+npx -y @smithery/cli install @sseaan/mcp-server-inbox --client claude
+```
 
 ### 依赖
 
