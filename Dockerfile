@@ -9,11 +9,8 @@ COPY README.md ./
 COPY main.py ./
 COPY inbox.py ./
 
-# Install build dependencies
-RUN pip install --no-cache-dir setuptools wheel
-
-# Install project dependencies
-RUN pip install --no-cache-dir .
+# Install dependencies directly
+RUN pip install --no-cache-dir requests>=2.28.0 mcp[cli]>=1.4.1
 
 # Environment variables will be provided at runtime
 # Example: -e INBOX_TOKEN=your_token_here
