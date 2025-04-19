@@ -8,9 +8,9 @@
 
 这个MCP服务器提供了一个工具，可以将笔记内容发送到指定的Inbox API端点。
 
-- 支持发送最多3000字符的笔记内容
-- 通过环境变量配置用户令牌
-- 简单易用的API接口
+- 接入 inBox 笔记 API
+- 支持通过 MCP 客户端创建笔记
+- 支持设置笔记标题
 
 ## 安装
 
@@ -21,6 +21,10 @@
 ```bash
 npx -y @smithery/cli install @sseaan/mcp-server-inbox --client claude
 ```
+### 前置要求
+
+- inBox 笔记 API (需要PRO)
+- 支持 MCP 协议的客户端（CherryStudio/Cursor等）
 
 ### 依赖
 
@@ -73,8 +77,70 @@ mcp run main.py
 ```bash
 mcp install main.py
 ```
+## 在 MCP 客户端中配置
 
-## API
+在Smithery输入INBOX_TOKEN
+获得json配置文件如下：
+```json
+"mcp-server-inbox": {
+  "command": "npx",
+  "args": [
+    "-y",
+    "@smithery/cli@latest",
+    "run",
+    "@sseaan/mcp-server-inbox",
+    "--key",
+    "*******************************"
+  ]
+}
+```
+
+### CherryStudio
+
+1. 打开 CherryStudio 的 MCP 服务器设置页面
+2. 点击 "添加服务器"
+3. 输入服务器名称（例如 "inbox-mcp-server"）
+4. 类型选择 “标准输入/输出(stdio)”
+5. 命令输入npx
+6. 输入参数
+```
+-y
+@smithery/cli@latest
+run
+@sseaan/mcp-server-inbox
+--key
+*******************************
+```
+7. 点击 "保存"
+
+### Cursor
+
+1. 打开 Cursor 的 MCP 服务配置文件（通常位于 `~/.cursor/mcp.json`）
+2. 添加 mcp-server-inbox 的配置：
+
+```json
+{
+  "mcpServers": {
+    "mcp-server-inbox": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@sseaan/mcp-server-inbox",
+        "--key",
+        "*******************************"
+      ]
+    }
+  }
+}
+```
+
+### 其他 MCP 客户端
+
+请参考对应 MCP 客户端的配置文档，添加类似的配置信息。
+
+## API 说明
 
 ### 发送笔记
 
@@ -82,7 +148,7 @@ mcp install main.py
 工具名称: send_note
 参数:
   - content: 笔记内容 (最多3000字符)
-返回: API响应
+  - title: 笔记标题
 ```
 
 ## 许可证

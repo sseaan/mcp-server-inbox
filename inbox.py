@@ -21,12 +21,13 @@ class Inbox:
             "Content-Type": "application/json",
         }
 
-    def send_note(self, content: str) -> Dict[str, Any]:
+    def send_note(self, content: str, title: str | None = None) -> Dict[str, Any]:
         """
         Send a note to the Inbox API.
 
         Args:
             content: Content of the note (max 3000 characters)
+            title: Optional title of the note
 
         Returns:
             Dict: The response from the API
@@ -39,6 +40,8 @@ class Inbox:
 
         try:
             payload = {"content": content}
+            if title is not None:
+                payload["title"] = title
             response = requests.post(
                 self.api_url,
                 headers=self.headers,

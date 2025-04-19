@@ -21,18 +21,19 @@ inbox_client = Inbox(INBOX_TOKEN)
 
 
 @mcp.tool()
-def send_note(content: str) -> Dict[str, Any]:
+def send_note(content: str, title: str | None = None) -> Dict[str, Any]:
     """
     Send a note to the Inbox API.
 
     Args:
         content: Content of the note (max 3000 characters)
+        title: Optional title of the note
 
     Returns:
         A dictionary containing the API response
     """
     try:
-        return inbox_client.send_note(content)
+        return inbox_client.send_note(content, title)
     except InboxException as e:
         # Map the Inbox exception to an MCP error
         raise McpError(ErrorData(code=INTERNAL_ERROR, message=str(e)))
